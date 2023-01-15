@@ -10,7 +10,11 @@ use near_sdk::*;
 // https://stackoverflow.com/questions/26731243/how-do-i-use-a-macro-across-module-files
 // -------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------
-
+// https://danielkeep.github.io/tlborm/book/
+// https://dhghomon.github.io/easy_rust/Chapter_61.html
+// http://gradebot.org/doc/ipur/trait.html
+// https://doc.rust-lang.org/reference/attributes.html
+// https://www.youtube.com/watch?v=geovSK3wMB8&ab_channel=JonGjengset
 // https://doc.rust-lang.org/reference/procedural-macros.html
 // https://blog.jetbrains.com/rust/2022/03/18/procedural-macros-under-the-hood-part-i/
 // https://dev.to/dandyvica/rust-procedural-macros-step-by-step-tutorial-36n8
