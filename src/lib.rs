@@ -42,7 +42,8 @@ macro_rules! contract {
             }
 
             impl $name{
-
+                        
+                // https://stackoverflow.com/questions/64790850/how-do-i-write-a-macro-that-returns-the-implemented-method-of-a-struct-based-on
                 // TODO - implement methods here 
                 // ...
             }
