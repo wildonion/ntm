@@ -1,6 +1,7 @@
 
 
 
+use std::collections::HashMap;
 use near_sdk::*;
 
 
@@ -29,12 +30,22 @@ use near_sdk::*;
 #[macro_export]
 macro_rules! contract {
 
-    ($name:expr, $signer:expr, [$($fields:ident),*]; [$($method_type:expr => $method:ty),*]) => {
+    ($name:ident, $signer:expr, //// ident can be used to pass struct
+     [$($fields:ident: $type:ty),*]; 
+     [$($method_type:expr => [$($method:item),*]),* ]) 
+     
+     => {
+            #[near_bindgen]
+            #[derive(near_sdk::borsh::BorshDeserialize, near_sdk::borsh::BorshSerialize, near_sdk::PanicOnDefault)]
+            pub struct $name{
+                $($fields: $type),*
+            }
 
-        {
-            
-        }
+            impl $name{
 
+                // TODO - implement methods here 
+                // ...
+            }
     }
 
 }
@@ -43,23 +54,40 @@ macro_rules! contract {
 
 contract!{
 
-    "rev", //// name of the contract
+    NftContract, //// name of the contract
     "wildonion.near", //// the contract owner
-    [contract_owner, deposit_by_owner, contract_balance]; //// fields
-    [ //// contract methods
-        "init" => fn init_contract(){
-
-        },
-        "private" => fn get_all_deposits(){
-
-        },
-        "payable" => fn deposit(){
+    /////////////////////
+    //// contract fields
+    /////////////////////
+    [
+        contract_owner: AccountId, 
+        deposit_by_owner: HashMap<AccountId, near_sdk::json_types::U128>, 
+        contract_balance: near_sdk::json_types::U128
+    ]; //// fields
+    /////////////////////
+    //// contract methods
+    /////////////////////
+    [ 
+        "init" => [ //// array of init methods
+            pub fn init_contract(){
     
-        },
-        "external" => fn get_address_bytes(){
+            }
+        ],
+        "private" => [ //// array of private methods
+            pub fn get_all_deposits(){
 
-        }
+            }
+        ],
+        "payable" => [ //// array of payable methods
+            pub fn deposit(){
+    
+            }
+        ],
+        "external" => [ //// array of external methods
+            fn get_address_bytes(){
 
+            }
+        ]
     ]
 
 }
